@@ -1,12 +1,12 @@
-import java.util.*;
+//import java.util.*;
 
 public class Main {
-    private static Scanner cin = new Scanner(System.in);
+    // private static Scanner cin = new Scanner(System.in);
 
     public static void main(String[] args) {
-        MyArrayList list = new MyArrayList();
+        MyList list = new MyLinkedList();
 
-        // Add some strings to the list
+        // Agregar algunas cadenas a la lista
         list.add("apple");
         list.add("banana");
         list.add("cherry");
@@ -17,55 +17,49 @@ public class Main {
          * cherry
          */
 
-        // Print the size of the list
+        // Imprimir el tamaño de la lista
         System.out.println("Size: " + list.size());
 
-        // Print the strings in the list
+        // Imprimir las cadenas en la lista
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
 
-        // Check if the list contains a string
+        // Verificar si la lista contiene una cadena
         System.out.println("Contains 'banana': " + list.contains("banana"));
 
-        // Get the index of a string
+        // Obtener el índice de una cadena
         System.out.println("Index of 'cherry': " + list.index("cherry"));
 
-        // Remove a string by index
+        // Eliminar una cadena por índice
         list.remove(1);
 
         /*
-         * apple | apple
-         * banana | cherry
-         * cherry |
+         * apple
+         * cherry
          */
 
-        // Print the size of the list
+        // Imprimir el tamaño de la lista
         System.out.println("Size: " + list.size());
 
-        // Print the strings in the list
+        // Imprimir las cadenas en la lista
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
 
-        // Remove a string by value
+        // Eliminar una cadena por valor
         list.remove("apple");
 
         /*
-         * apple | cherry
-         * cherry |
-         * 
+         * cherry
          */
 
-        // Print the size of the list
+        // Imprimir el tamaño de la lista
         System.out.println("Size: " + list.size());
 
-        // Print the strings in the list
+        // Imprimir las cadenas en la lista
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
-
-        cin.close();
     }
-
 }
