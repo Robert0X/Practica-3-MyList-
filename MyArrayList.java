@@ -1,70 +1,62 @@
-public class MyArrayList implements MyList {
-    String[] s = new String[0];
+import java.util.ArrayList;
 
-    @Override
-    public boolean add(String s) {
-        String[] newArray = new String[this.s.length + 1];
-        System.arraycopy(this.s, 0, newArray, 0, this.s.length);
-        newArray[newArray.length - 1] = s;
-        this.s = newArray;
-        return true;
-    }
+public class MyArrayList<E> implements MyList<E> {
+    private ArrayList<E> elements;
+    private int size;
 
-    @Override
-    public boolean contains(String s) {
-        for (String str : this.s) {
-            if (str.equals(s)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String get(int i) {
-        if (i >= 0 && i < this.s.length) {
-            return this.s[i];
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public int index(String s) {
-        for (int i = 0; i < this.s.length; i++) {
-            if (this.s[i].equals(s)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    @Override
-    public boolean remove(int i) {
-        if (i >= 0 && i < this.s.length) {
-            String[] newArray = new String[this.s.length - 1];
-            System.arraycopy(this.s, 0, newArray, 0, i);
-            System.arraycopy(this.s, i + 1, newArray, i, this.s.length - i - 1);
-            this.s = newArray;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean remove(String s) {
-        int index = this.index(s);
-        if (index != -1) {
-            this.remove(index);
-            return true;
-        } else {
-            return false;
-        }
+    public MyArrayList() {
+        elements = new ArrayList<>();
     }
 
     @Override
     public int size() {
-        return this.s.length;
+        return size;
+    }
+
+    @Override
+    public boolean add(E element) {
+        elements.add(element);
+        size++;
+        return true;
+    }
+
+    @Override
+    public E get(int index) {
+        if (index < 0 || index >= size) {
+            return null;
+        }
+        return elements.get(index);
+    }
+
+    @Override
+    public boolean contains(E element) {
+        return elements.contains(element);
+    }
+
+    @Override
+    public boolean remove(int index) {
+        if (index < 0 || index >= size) {
+            return false;
+        }
+        E element = elements.get(index);
+        elements.remove(index);
+        size--;
+        return true;
+    }
+
+    @Override
+    public boolean remove(E element) {
+        int index = elements.indexOf(element);
+        if (index == -1) {
+            return false;
+        }
+        elements.remove(index);
+        size--;
+        return true;
+    }
+
+    @Override
+    public int indexOf(E element) {
+        return elements.indexOf(element);
     }
 }

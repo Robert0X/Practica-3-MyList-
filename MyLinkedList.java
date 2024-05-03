@@ -1,6 +1,11 @@
-public class MyLinkedList implements MyList {
-    private Node head;
+public class MyLinkedList<E> implements MyList<E> {
+    private Node<E> head;
     private int size;
+
+    public MyLinkedList() {
+        head = null;
+        size = 0;
+    }
 
     @Override
     public int size() {
@@ -8,37 +13,38 @@ public class MyLinkedList implements MyList {
     }
 
     @Override
-    public boolean add(String s) {
+    public boolean add(E element) {
+        Node<E> newNode = new Node<>(element, null);
         if (head == null) {
-            head = new Node(s, null);
+            head = newNode;
         } else {
-            Node current = head;
+            Node<E> current = head;
             while (current.next != null) {
                 current = current.next;
             }
-            current.next = new Node(s, null);
+            current.next = newNode;
         }
         size++;
         return true;
     }
 
     @Override
-    public String get(int i) {
-        if (i < 0 || i >= size) {
+    public E get(int index) {
+        if (index < 0 || index >= size) {
             return null;
         }
-        Node current = head;
-        for (int j = 0; j < i; j++) {
+        Node<E> current = head;
+        for (int i = 0; i < index; i++) {
             current = current.next;
         }
-        return current.value;
+        return current.element;
     }
 
     @Override
-    public boolean contains(String s) {
-        Node current = head;
+    public boolean contains(E element) {
+        Node<E> current = head;
         while (current != null) {
-            if (current.value.equals(s)) {
+            if (current.element.equals(element)) {
                 return true;
             }
             current = current.next;
@@ -47,15 +53,15 @@ public class MyLinkedList implements MyList {
     }
 
     @Override
-    public boolean remove(int i) {
-        if (i < 0 || i >= size) {
+    public boolean remove(int index) {
+        if (index < 0 || index >= size) {
             return false;
         }
-        if (i == 0) {
+        if (index == 0) {
             head = head.next;
         } else {
-            Node current = head;
-            for (int j = 0; j < i - 1; j++) {
+            Node<E> current = head;
+            for (int i = 0; i < index - 1; i++) {
                 current = current.next;
             }
             current.next = current.next.next;
@@ -65,18 +71,18 @@ public class MyLinkedList implements MyList {
     }
 
     @Override
-    public boolean remove(String s) {
+    public boolean remove(E element) {
         if (head == null) {
             return false;
         }
-        if (head.value.equals(s)) {
+        if (head.element.equals(element)) {
             head = head.next;
             size--;
             return true;
         }
-        Node current = head;
+        Node<E> current = head;
         while (current.next != null) {
-            if (current.next.value.equals(s)) {
+            if (current.next.element.equals(element)) {
                 current.next = current.next.next;
                 size--;
                 return true;
@@ -87,10 +93,10 @@ public class MyLinkedList implements MyList {
     }
 
     @Override
-    public int index(String s) {
-        Node current = head;
+    public int indexOf(E element) {
+        Node<E> current = head;
         for (int i = 0; current != null; i++) {
-            if (current.value.equals(s)) {
+            if (current.element.equals(element)) {
                 return i;
             }
             current = current.next;
@@ -98,12 +104,12 @@ public class MyLinkedList implements MyList {
         return -1;
     }
 
-    private static class Node {
-        private String value;
-        private Node next;
+    private static class Node<E> {
+        private E element;
+        private Node<E> next;
 
-        public Node(String value, Node next) {
-            this.value = value;
+        public Node(E element, Node<E> next) {
+            this.element = element;
             this.next = next;
         }
     }

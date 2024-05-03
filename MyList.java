@@ -1,17 +1,15 @@
-public interface MyList {
-
+public interface MyList<E> {
     int size();
 
-    boolean add(String s);
+    boolean add(E element);
 
-    String get(int i);
+    E get(int index);
 
-    boolean contains(String s);
+    boolean contains(E element);
 
-    boolean remove(int i);
+    boolean remove(int index);
 
-    boolean remove(String s);
+    boolean remove(E element);
 
-    int index(String s);
-
+    int indexOf(E element);
 }
